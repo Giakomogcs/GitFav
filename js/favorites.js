@@ -12,8 +12,6 @@ export class Favorites {
   load() {
     this.entries = JSON.parse(localStorage.getItem
       ('@github-favorites:')) || []
-
-
   }
 
   save() {
@@ -36,8 +34,8 @@ export class Favorites {
       }
 
       this.entries = [user, ...this.entries]
-      this.update()
       this.save()
+      this.update()
       this.root.querySelector('.search input').value = "";
       
 
@@ -53,8 +51,8 @@ export class Favorites {
     const filteredEntries = this.entries
       .filter((entry) => entry.login !== user.login)
     this.entries = filteredEntries
-    this.update()
     this.save()
+    this.update()
   }
 }
 
@@ -87,9 +85,10 @@ export class FavoritesView extends Favorites {
 
   update() {
     this.removeAllTr()
+    const local = localStorage.getItem('@github-favorites:')
     
-    if(this.entries != []){
-
+    if(local != '[]'){
+      
       this.entries.forEach(user => {
         const row = this.createRow()
         row.querySelector('.user a').href = `https:/github.com/${user.login}`
@@ -99,8 +98,6 @@ export class FavoritesView extends Favorites {
         row.querySelector('.user span').textContent = user.login
         row.querySelector('.repositories').textContent = user.public_repos
         row.querySelector('.followers').textContent = user.followers
-        
-  
   
         row.querySelector('.remove').onclick = () => {
           const isOK = confirm('Tem certeza que deseja deletar essa linha?')
@@ -112,21 +109,38 @@ export class FavoritesView extends Favorites {
         this.tbody.append(row)
       }) 
     }
+    else{
+      const row = this.localVazio()
+      this.tbody.append(row)
+    }
   }
 
 
+  localVazio() {
+    const tr = document.createElement('tr')
+      tr.innerHTML = `
+        <td colspan="4">
+          <div class="vazio">
+            <img src="./images/Estrela.svg" alt="">
+            <h2>Nenhum favorito ainda</h2>
+          </div>
+        </td>
+      `
+    console.log(tr)
+    return tr
+  }
+
   createRow() {
     const tr = document.createElement('tr')
-
-    if(this.entries != []){
-
       tr.innerHTML = `
-        <td class="user">
-          <img src="https://github.com//Giakomogcs.png" alt="imagem do perfil do usuário">
-          <a href="https://github.com/Giakomogcs" target="_blank">
-            <p>Giovani Silva</p>
-            <span>Giakomogcs</span>
-          </a>
+        <td>
+          <div class="user">
+            <img src="https://github.com//Giakomogcs.png" alt="imagem do perfil do usuário">
+            <a href="https://github.com/Giakomogcs" target="_blank">
+              <p>Giovani Silva</p>
+              <span>Giakomogcs</span>
+            </a>
+            </div>
         </td>
         <td class="repositories">
           42
@@ -138,15 +152,6 @@ export class FavoritesView extends Favorites {
           <button class="remove">Remover</button>
         </td>
       `
-    }
-    else{
-      tr.innerHTML = `
-        <td class="vazio">
-          <img src="./images/Estrela.svg" alt="">
-          <h2>Nenhum favorito ainda</h2>
-        </td>`
-    }
-
     return tr
   }
   

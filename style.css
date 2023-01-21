@@ -20,6 +20,7 @@ body{
   background-color: #000000;
 
   min-width: 70rem;
+  overflow: hidden;
 }
 
 body *{
@@ -49,7 +50,7 @@ header{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 2.5rem 0;
+  margin: 2.5rem 0 8rem;
 }
 
 .logo{
@@ -97,27 +98,35 @@ header{
 }
 
 .search button:hover{
-  filter: brightness(1.1);
+  color: #065E7C;
+  background: #FFFFFF;
+  transition: .5s;
 }
+
+.search svg path{
+  fill: currentcolor;
+  }
+
 
 table{
   width: 100%;
-
-  border-collapse: collapse;
   
-  border: 1px solid #4A808C;
-  border-radius: 1.2rem;
+  border: none; 
+  border-collapse: separate;
+  border-spacing: 0;
+
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 table *{
   font-size: 1.4rem;
   color: var(--text-color);
-  
 }
 
-tbody{
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+table tr{
+  height: 10rem;
+  border: 1.5px solid #4A808C;
 }
 
 table th{
@@ -131,16 +140,15 @@ table th{
 }
 
 table thead tr{
+  height: 6rem;
   background: #06181C;
   border: none
 }
-
 table tr{
   background: #06181C;
-  border: 1px solid #4A808C;
 }
 
-table tr:nth-child(odd) {
+table tr:nth-child(even) {
   background: rgba(6, 22, 27, 0.5);
 }
 
@@ -149,24 +157,24 @@ table td{
   text-align: left;
 }
 
-td.user img {
+td .user img {
   width: 5rem;
   object-fit: cover;
   border-radius: 50%;
 }
 
-td.user{
+td .user{
   display: flex;
   align-items: center;
   gap: 1rem;
-  min-width: 22rem;
+  min-width: 10rem;
 }
 
-td.user a{
+td .user a{
   text-decoration: none;
 }
 
-td.user a p{
+td .user a p{
   font-weight: bold;
 }
 
@@ -178,36 +186,80 @@ td .remove{
 }
 
 
-thead th:first-child{
+/* top-left border-radius */
+table tr:first-child th:first-child {
   border-top-left-radius: 1.2rem;
 }
 
-thead th:last-child{
+/* top-right border-radius */
+table tr:first-child th:last-child {
   border-top-right-radius: 1.2rem;
 }
 
-tbody th:first-child td:first-child{
-  border-top-left-radius: 1.2rem;
+/* bottom-left border-radius */
+table tr:last-child td:first-child {
+  border-bottom-left-radius: 1.2rem;
 }
 
-tbody th:last-child{
-  border-top-right-radius: 1.2rem;
+/* bottom-right border-radius */
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 1.2rem;
 }
 
 
-td.vazio img {
-  width: 5rem;
-  object-fit: cover;
-}
+.vazio{
+  width: 100%;
+  height: 100%;
 
-td.vazio{
   display: flex;
   align-items: center;
-  gap: 1rem;
-  min-width: 22rem;
+  text-align: center;
+  justify-content: center;
+  gap: 6rem;
+  padding: 5rem;
+}
+
+.vazio h2{
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 25px;
+  color: #4E5455;
 }
 
 .hide{
   display: none;
 }
 
+
+.table {
+  
+border: 2px solid #4A808C;
+border-radius: 1.2rem;
+
+position: relative;
+max-height: 65vh;
+
+overflow: auto;
+
+
+display: block;
+}
+
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: .6rem;
+  border-radius: .3rem;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background-color: #4A808C;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  
+  height: 12rem;
+  border-radius: .1rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #3e6b76;
+}
