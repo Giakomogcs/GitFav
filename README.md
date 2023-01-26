@@ -7,7 +7,6 @@ Uma aplicação para adicionar todos os usuarios do Github que eu curto, em uma 
 
 ## Demonstração
 
-<<<<<<< HEAD
 ![alt text](https://github.com/Giakomogcs/GitFav/blob/main/images/Screenshot_4.png?raw=true)
 
 
